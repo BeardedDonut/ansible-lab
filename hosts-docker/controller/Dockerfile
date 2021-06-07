@@ -8,8 +8,8 @@ RUN apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y \
     ansible
 
-# copy content of ansible directory from local disk to file system inside Docker image
-# COPY ansible /var/ans/
+# change the current working directory to /common to create the ssh-keys
+WORKDIR /common/
 
 
 # install zsh on master node for convinient
