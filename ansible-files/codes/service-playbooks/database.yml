@@ -16,6 +16,12 @@
       lineinfile: dest=/etc/mysql/mysql.conf.d/mysqld.cnf regexp=^bind-address line="bind-address = 0.0.0.0"
       notify: restart mysql
     
+    - name: create demo database inside mysql
+      mysql_db: name=demo state=present
+    
+    - name: create demo user
+      mysql_user: name=demo password=demo priv=demo.*:ALL host='%' state=present  # user and passowrd are based on the demo.wsgi file for the demo app
+    
   handlers:
     - name: restart mysql
       service: name=mysql state=restarted
