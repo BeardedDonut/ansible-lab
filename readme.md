@@ -104,9 +104,39 @@ Ther reason behind this is that if you can edit/update the files on your own env
 3. **ansible-files/codes/templates**: Templates that are used for setting up this environment
 4. **ansible-files/codes/utility-playbooks**: Ansible playbooks that usually used against the entire stack and are usually for troubleshooting and stack monitoring.
 
+### Setup services:
+After setting up the environment, you can setup the loadbalancer, webserver and database. Follow the commands below to setup all services (**Note**: you should run these commands from inside the controller)
+1. Navigate to `/codes/service-playbooks` directory
+    ```bash
+    # inside the controller container
+    cd /codes/service-playbooks/
+    ```
+2. Run the setup playbook for each service:
+    ```bash
+    # inside the controller container
+    # 1. setup controller
+    ansible-playbook controller.yml
+
+    # 2. setup database
+    ansible-playbook database.yml
+
+    # 3. setup webserver
+    ansible-playbook webserver.yml
+
+    # 4. setup load-balancer
+    ansible-playbook loadbalancer.yml
+    ```
+3. To make sure everything is working run the following commands
+    ```bash
+    # insdie controller container
+    curl lb01   
+    # >>> "Hello, from sunny web01!" or "Hello, from sunny web02!"
+    curl lb01/db
+    # >>> "Database Connected from web01!" or "Database Connected from web02!" 
+
 ---
 
 ***Note***: 
-I used [this](https://github.com/LMtx/ansible-lab-docker) repo to create the setup and it was really helpful:
+I used [this](https://github.com/LMtx/ansible-lab-docker) repo to create the setup and it was really helpful
 
 
