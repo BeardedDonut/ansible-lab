@@ -95,15 +95,14 @@ Here is a diagram of how the volume setup is:
     }
     ```
 
-# Ansible playbooks:
-the `ansible` directory contains all the required playbooks and templates to appropriately setup this environment.
+# Inside ansible-files Directory:
+the `ansible-files` directory contains all the required playbooks,templates and the demo flask application files. The `codes` directory will be bind mounted to the `controller` host and is accessible from `/codes` directory inside host. 
+Ther reason behind this is that if you can edit/update the files on your own environment (not `controller`) and have them updated inside the `controller` as well. A brief description of what each directory contains is in the following:
 
-**TODO LIST:**
-- create host setup ansible playbooks
-    - loadbalancer
-    - database
-    - webserver
-- create stack maintenance playbooks
+1. **ansible-files/codes/demo**: demo flask application files and configurations
+2. **ansible-files/codes/service-playbooks**: Ansible playbooks to setup each host
+3. **ansible-files/codes/templates**: Templates that are used for setting up this environment
+4. **ansible-files/codes/utility-playbooks**: Ansible playbooks that usually used against the entire stack and are usually for troubleshooting and stack monitoring.
 
 ---
 
