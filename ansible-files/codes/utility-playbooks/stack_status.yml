@@ -1,0 +1,15 @@
+---
+- hosts: loadbalancer
+  tasks:
+    - name: check nginx service status
+      command: service nginx status
+
+- hosts: webserver
+  tasks:
+    - name: check apache2 service status
+      command: service apache2 status
+
+- hosts: database
+  tasks:
+    - name: check mysql service status
+      command: service mysql status
